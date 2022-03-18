@@ -28,7 +28,7 @@ public class CharacterControllerMovement : MonoBehaviour
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
         //follow mouse "up" and "down" if not strafing
-        if (direction.magnitude >=0.1 && horizontal == 0)
+        if (direction.magnitude >= 0.1 && horizontal == 0)
         {
             float targetAngleY = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float targetAngleX = Mathf.Atan2(direction.y, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.x;
