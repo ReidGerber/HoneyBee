@@ -13,11 +13,13 @@ public class CharacterControllerMovement : MonoBehaviour
     private float turnSmoothVelocityY;
     private float turnSmoothVelocityX;
     Transform cam;
+    Animator animator;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         cam = Camera.main.transform;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -54,7 +56,12 @@ public class CharacterControllerMovement : MonoBehaviour
 
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngleY, 0f) * Vector3.forward;
             controller.Move(moveDirection.normalized * speed * Time.deltaTime);
+            animator.SetBool("isMoving", true);
             
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
         }
             controller.Move(jumpDirection * speed * Time.deltaTime);
     }
