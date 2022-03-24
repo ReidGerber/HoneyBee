@@ -8,13 +8,17 @@ public class HoneyBee : MonoBehaviour
 
     private bool foundFlower = false;
     private Vector3 targetLocation;
-    [SerializeField] float speed;
+    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float rotateSpeed = 700f;
+    private Vector3 targetRotation;
+    private NPCWander npcWander;
 
 
     // Start is called before the first frame update
     private void OnEnable()
     {
         foundFlower = false;
+        npcWander = GetComponentInChildren<NPCWander>();
     }
 
 
@@ -23,7 +27,12 @@ public class HoneyBee : MonoBehaviour
     {
         if (foundFlower)
         {
+            npcWander.StopWander();
             GoToFlower();
+        }
+        if (!foundFlower)
+        {
+            npcWander.StartWander(moveSpeed, rotateSpeed);
         }
 
     }
@@ -31,7 +40,7 @@ public class HoneyBee : MonoBehaviour
     private void GoToFlower()
     {
         // Move our position a step closer to the target.
-        float step = speed * Time.deltaTime; // calculate distance to move
+        float step = moveSpeed * Time.deltaTime; // calculate distance to move
         transform.position = Vector3.MoveTowards(transform.position, targetLocation, step);
 
         // Check if the position of the cube and sphere are approximately equal.
@@ -40,6 +49,9 @@ public class HoneyBee : MonoBehaviour
             // Swap the position of the cylinder.
             foundFlower = false;
         }
+
+        Quaternion toRotation = Quaternion.LookRotation(targetLocation - transform.position, Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
     }
 
     public void FoundFlower(Vector3 flowerTransform)

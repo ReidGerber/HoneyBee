@@ -18,7 +18,7 @@ public class PollenCollector : MonoBehaviour
     {
         if (harvesting && !harvestWait)
         {
-            StartCoroutine("HarvestHoneyPerSecond");
+            StartCoroutine("HarvestHoney");
         }
     }
 
@@ -31,7 +31,7 @@ public class PollenCollector : MonoBehaviour
         }
     }
 
-    IEnumerator HarvestHoneyPerSecond()
+    IEnumerator HarvestHoney()
     {
         harvestWait = true;
         pollen.HarvestPollen(1.0f);
