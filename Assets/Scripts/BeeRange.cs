@@ -5,6 +5,7 @@ using UnityEngine;
 public class BeeRange : MonoBehaviour
 {
     private HoneyBee thisBee;
+    private bool shouldLook;
 
     private void Awake()
     {
@@ -12,18 +13,37 @@ public class BeeRange : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        var isPollenFlower = other.GetComponent<Pollen>();
-        if (isPollenFlower)
+        if (!shouldLook)
         {
-            thisBee.FoundFlower(other.transform.position);
+            var isPollenFlower = other.GetComponent<Pollen>();
+            if (isPollenFlower)
+            {
+                thisBee.FoundFlower(other.transform.position);
+            }
         }
+
     }
     private void OnTriggerStay(Collider other)
     {
-        var isPollenFlower = other.GetComponent<Pollen>();
-        if (isPollenFlower)
+
+        if (!shouldLook)
         {
-            thisBee.FoundFlower(other.transform.position);
+            var isPollenFlower = other.GetComponent<Pollen>();
+            if (isPollenFlower)
+            {
+                thisBee.FoundFlower(other.transform.position);
+            }
         }
+
+    }
+
+    public void SetShouldLook(bool yes)
+    {
+        shouldLook = yes;
+    }
+
+    public void StopShouldLook(bool no)
+    {
+        shouldLook = no;
     }
 }

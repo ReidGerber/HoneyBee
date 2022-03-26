@@ -6,12 +6,16 @@ using Random = UnityEngine.Random;
 
 public class NPCWander : MonoBehaviour
 {
+    [SerializeField] int minMagnitude = 5;
+    [SerializeField] int maxMagnitude = 10;
+
     private bool shouldWander;
     private float moveSpeed;
     private float rotateSpeed;
     private Vector3 targetLocation;
-    [SerializeField] int minMagnitude = 5;
-    [SerializeField] int maxMagnitude = 10;
+    Animator animator;
+
+    
 
 
 
@@ -19,6 +23,7 @@ public class NPCWander : MonoBehaviour
     {
         shouldWander = false;
         targetLocation = transform.position;
+        animator = GetComponent<Animator>();
     }
 
 
@@ -75,11 +80,13 @@ public class NPCWander : MonoBehaviour
         moveSpeed = ms;
         rotateSpeed = rs;
         shouldWander = true;
+        animator.SetBool("isMoving", true);
     }
 
     public void StopWander()
     {
         shouldWander = false;
         targetLocation = transform.position;
+        
     }
 }
