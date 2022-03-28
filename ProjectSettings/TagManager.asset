@@ -6,6 +6,7 @@ TagManager:
   tags:
   - NPCBee
   - pollenTarget
+  - Terrain
   layers:
   - Default
   - TransparentFX

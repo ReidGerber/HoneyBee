@@ -8,7 +8,8 @@ public class HoneyBee : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float rotateSpeed = 700f;
-    
+    [SerializeField] float groundHeight = 1f;
+
     private Vector3 targetRotation;
     private Vector3 targetLocation;
     private bool foundFlower = false;
@@ -27,6 +28,7 @@ public class HoneyBee : MonoBehaviour
 
     //bee states 
     private int beeState;
+
 
     //sharing variables
     internal float getMoveSpeed()
@@ -61,7 +63,7 @@ public class HoneyBee : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         switch (beeState)
         {
 
@@ -72,9 +74,11 @@ public class HoneyBee : MonoBehaviour
             case 2: //found flower
                 beeRange.enabled = false;
                 npcWander.enabled = false;
+                CheckGroundHeight();
                 GoToFlower();
                 break;
             case 1: //wander
+                CheckGroundHeight();
                 beeRange.enabled = true;
                 npcWander.enabled = true;
                 pollenCollector.enabled = false;
@@ -108,6 +112,31 @@ public class HoneyBee : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
     }
 
+    private void CheckGroundHeight()
+    {
+        Ray ray = new Ray(transform.position, Vector3.down);
+        RaycastHit hitInfo;
+        if (Physics.Raycast(ray, out hitInfo))
+        {
+            if (hitInfo.distance <= .5 && hitInfo.collider.tag == "Terrain")
+            {
+                // Move our position a step closer to the target.
+                Vector3 vectorUp = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+
+                float step = moveSpeed * Time.deltaTime; // calculate distance to move
+                transform.position = Vector3.MoveTowards(transform.position, vectorUp, step * 50);
+            }
+            if (hitInfo.distance >= 2.5 && hitInfo.collider.tag == "Terrain")
+            {
+                // Move our position a step closer to the target.
+                Vector3 vectorDown = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
+
+                float step = moveSpeed * Time.deltaTime; // calculate distance to move
+                transform.position = Vector3.MoveTowards(transform.position, vectorDown, step);
+            }
+        }
+
+    }
     public void FoundFlower(Vector3 flowerTransform, Pollen other)
     {
         if (flowerTransform != null)
