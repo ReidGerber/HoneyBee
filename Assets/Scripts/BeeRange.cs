@@ -4,46 +4,19 @@ using UnityEngine;
 
 public class BeeRange : MonoBehaviour
 {
-    private HoneyBee thisBee;
-    private bool shouldLook;
-
+    private HoneyBee honeyBee;
     private void Awake()
     {
-        thisBee = GetComponentInParent<HoneyBee>();
+        honeyBee = GetComponentInParent<HoneyBee>();
     }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (!shouldLook)
+        var pollenFlower = other.GetComponent<Pollen>();
+        if (pollenFlower)
         {
-            var isPollenFlower = other.GetComponent<Pollen>();
-            if (isPollenFlower)
-            {
-                thisBee.FoundFlower(other.transform.position);
-            }
+            honeyBee.FoundFlower(other.transform.position, pollenFlower);
         }
 
-    }
-    private void OnTriggerStay(Collider other)
-    {
-
-        if (!shouldLook)
-        {
-            var isPollenFlower = other.GetComponent<Pollen>();
-            if (isPollenFlower)
-            {
-                thisBee.FoundFlower(other.transform.position);
-            }
-        }
-
-    }
-
-    public void SetShouldLook(bool yes)
-    {
-        shouldLook = yes;
-    }
-
-    public void StopShouldLook(bool no)
-    {
-        shouldLook = no;
     }
 }

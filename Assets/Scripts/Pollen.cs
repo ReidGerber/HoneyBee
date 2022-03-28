@@ -27,6 +27,7 @@ public class Pollen : MonoBehaviour
     private void Die()
     {
         gameObject.SetActive(false);
+
         Instantiate(objectToSpawn, transform.position, transform.rotation);
     }
 }
