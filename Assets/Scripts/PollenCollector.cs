@@ -7,11 +7,30 @@ public class PollenCollector : MonoBehaviour
     private Pollen pollen;
     bool harvesting;
     private bool harvestWait;
+    HoneyBee honeyBee;
+    private HoneyDrop honeyDrop;
 
     private void Awake()
     {
+        honeyBee = GetComponentInParent<HoneyBee>();
+    }
+
+    private void OnEnable()
+    {
         harvesting = false;
         harvestWait = false;
+        pollen = honeyBee.GetPollenObject();
+        if (pollen != null)
+        {
+            harvesting = true;
+        }
+
+        if (pollen == null)
+        {
+            //tell parent that no flower found (passing false to set "foundFlower" status in parent)
+            honeyBee.FlowerHarvestComplete();
+            Debug.Log("pollen == null");
+        }
     }
 
     private void Update()
@@ -24,10 +43,12 @@ public class PollenCollector : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        pollen = other.GetComponent<Pollen>();
-        if (pollen != null)
+        honeyDrop = other.GetComponent<HoneyDrop>();
+
+        if (honeyDrop != null)
         {
-            harvesting = true;
+            //tell parent that no flower found (passing false to set "foundFlower" status in parent)
+            honeyBee.FlowerHarvestComplete();
         }
     }
 
@@ -38,14 +59,6 @@ public class PollenCollector : MonoBehaviour
         yield return new WaitForSeconds(1f);
         harvestWait = false;
     }
-
-    private void OnTriggerExit(Collider other)
-    {
-        harvesting = false;
-        harvestWait = false;
-    }
-
-
 
 }
 

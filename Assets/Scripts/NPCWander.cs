@@ -6,24 +6,25 @@ using Random = UnityEngine.Random;
 
 public class NPCWander : MonoBehaviour
 {
-    [SerializeField] int minMagnitude = 5;
-    [SerializeField] int maxMagnitude = 10;
+    [SerializeField] int minWanderRange = 5;
+    [SerializeField] int maxWanderRange = 10;
 
-    private bool shouldWander;
     private float moveSpeed;
     private float rotateSpeed;
     private Vector3 targetLocation;
-    Animator animator;
-
-    
-
+    HoneyBee honeyBee;
 
 
     private void Awake()
     {
-        shouldWander = false;
-        targetLocation = transform.position;
-        animator = GetComponent<Animator>();
+        honeyBee = GetComponentInParent<HoneyBee>();
+        moveSpeed = honeyBee.getMoveSpeed();
+        rotateSpeed = honeyBee.getRotateSpeed();
+    }
+
+    private void OnEnable()
+    {
+        targetLocation = Vector3.zero; ;
     }
 
 
@@ -31,17 +32,7 @@ public class NPCWander : MonoBehaviour
     void Update()
     {
 
-
-        if (shouldWander)
-        {
-            Wander();
-        }
-    }
-
-    private void Wander()
-    {
-
-        if (targetLocation == transform.position)
+        if (targetLocation == Vector3.zero)
         {
             FindNewTarget();
         }
@@ -50,43 +41,26 @@ public class NPCWander : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, targetLocation, step);
 
         // Check if the position of the cube and sphere are approximately equal.
-        if (transform.position.x - targetLocation.x < 1f && transform.position.z - targetLocation.z <1f)
+        if (transform.position.x - targetLocation.x < 1f && transform.position.z - targetLocation.z < 1f)
         {
-            targetLocation = transform.position;
+            targetLocation = Vector3.zero;
+            //FindNewTarget();
         }
 
         Quaternion toRotation = Quaternion.LookRotation((targetLocation - transform.position), Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
     }
 
-
     private void FindNewTarget()
     {
-
         float x = Random.Range(-100, 100);
         Debug.Log("x = " + x);
         float z = Random.Range(-100, 100);
         Debug.Log("z = " + z);
-        float magnitude = Random.Range(minMagnitude, maxMagnitude);
+        float magnitude = Random.Range(minWanderRange, maxWanderRange);
         Debug.Log("magnitude = " + magnitude);
         Vector3 newTarget = new Vector3(x, 0, z).normalized;
         newTarget = newTarget * magnitude;
-
         targetLocation = newTarget + transform.position;
-    }
-
-    public void StartWander(float ms, float rs)
-    {
-        moveSpeed = ms;
-        rotateSpeed = rs;
-        shouldWander = true;
-        animator.SetBool("isMoving", true);
-    }
-
-    public void StopWander()
-    {
-        shouldWander = false;
-        targetLocation = transform.position;
-        
     }
 }
