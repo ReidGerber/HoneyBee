@@ -25,7 +25,7 @@ public class CharacterControllerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
+        float horizontal = Input.GetAxisRaw("Mouse X");
         float vertical = Input.GetAxisRaw("Vertical");
         float jump = Input.GetAxisRaw("Jump");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;

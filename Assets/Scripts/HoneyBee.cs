@@ -109,6 +109,7 @@ public class HoneyBee : MonoBehaviour
         }
 
         Quaternion toRotation = Quaternion.LookRotation(targetLocation - transform.position, Vector3.up);
+        toRotation = Quaternion.Euler(transform.rotation.eulerAngles.x, toRotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
     }
 
