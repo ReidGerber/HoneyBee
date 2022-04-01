@@ -29,7 +29,6 @@ public class PollenCollector : MonoBehaviour
         {
             //tell parent that no flower found (passing false to set "foundFlower" status in parent)
             honeyBee.FlowerHarvestComplete();
-            Debug.Log("pollen == null");
         }
     }
 

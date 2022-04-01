@@ -15,4 +15,21 @@ public class HoneyDrop : MonoBehaviour
     {
         
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var colliderObject = other.GetComponent<Collider>();
+        
+        if (colliderObject.tag == "Player")
+        {
+            UIScoreManager.instance.AddHoney(1);
+            Die();
+
+        }
+    }
+
+    private void Die()
+    {
+        gameObject.SetActive(false);
+    }
 }

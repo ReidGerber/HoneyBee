@@ -31,6 +31,7 @@ public class CharacterControllerMovement : MonoBehaviour
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
         Vector3 jumpDirection = new Vector3(0f, jump, 0f).normalized;
 
+
         //follow mouse "up" and "down" if not strafing
         //if (direction.magnitude >= 0.1 && horizontal == 0)
         //{
