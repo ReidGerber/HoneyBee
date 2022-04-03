@@ -7,9 +7,9 @@ public class StingerBullet : MonoBehaviour
 {
     [SerializeField] float speed = 10.0f;
     [SerializeField] float damage = 1.0f;
-    [SerializeField] GameObject objectToSpawn;
+    [SerializeField] ParticleSystem dieParticle;
 
-    private ParticleSystem ps;
+    
     private Rigidbody rb;
     private float dieDelay;
     
@@ -17,21 +17,22 @@ public class StingerBullet : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        ps = GetComponent<ParticleSystem>();
-        dieDelay = ps.main.startLifetimeMultiplier;
+        dieDelay = 1f;
     }
 
     private void OnEnable()
     {
-        ps.Stop();
-        //rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Impulse);
+        rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Impulse);
     }
 
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("collision");
+        
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "Bullet")
         {
+            Debug.Log("Collider = "+ other.gameObject.tag);
             StartCoroutine(Die());
         }
         
@@ -40,10 +41,14 @@ public class StingerBullet : MonoBehaviour
 
     IEnumerator Die()
     {
+        Debug.Log("dead");
         rb.velocity = Vector3.zero;
-        ps.Play();
+        GetComponent<Renderer>().enabled = false;
+        Instantiate(dieParticle, transform);
+        dieParticle.Play();
         yield return new WaitForSeconds(dieDelay);
         gameObject.SetActive(false);
 
     }
+
 }

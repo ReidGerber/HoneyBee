@@ -9,9 +9,6 @@ public class ShootStinger : MonoBehaviour
     [SerializeField] GameObject shooter;
     [SerializeField] GameObject stinger;
 
-
-    private Quaternion rotation;
-    private Vector3 direction;
     
     // Start is called before the first frame update
     void Start()
@@ -27,22 +24,9 @@ public class ShootStinger : MonoBehaviour
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit raycastHit))
             {
-                Vector3 direction = (raycastHit.point - cam.transform.position).normalized;
-                GameObject shot = Instantiate(stinger, shooter.transform.position, Quaternion.FromToRotation(cam.transform.forward, direction)) as GameObject;
-                shot.transform.LookAt(raycastHit.point);
-                var rb = shot.GetComponent <Rigidbody>();
-                rb.AddRelativeForce(Vector3.forward * 10f, ForceMode.Impulse);
-
-
-
-
+                transform.LookAt(raycastHit.point);
+                Instantiate(stinger, transform.position, transform.rotation);
             }
-            
-            
-            
-            
-            //Vector3 starget = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cam.transform.position.z));
-            //rotation = Quaternion.Euler(cam.transform.rotation.x + 90, cam.transform.rotation.y, cam.transform.rotation.z);
             
         } 
     }
