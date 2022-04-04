@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -36516,6 +36516,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Volcano Lava Particle
       objectReference: {fileID: 0}
+    - target: {fileID: 9187018316179500386, guid: 258dd0c202ff27941ac3d05b6a247af9,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 9187018316179500387, guid: 258dd0c202ff27941ac3d05b6a247af9,
         type: 3}
       propertyPath: m_RootOrder
@@ -36695,12 +36700,12 @@ PrefabInstance:
     - target: {fileID: 4788037075001498950, guid: 71a53da93ef69814db83134ac2587b9f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.1529992
+      value: 0.15299922
       objectReference: {fileID: 0}
     - target: {fileID: 4788037075001498950, guid: 71a53da93ef69814db83134ac2587b9f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.012837281
+      value: -0.012837287
       objectReference: {fileID: 0}
     - target: {fileID: 4788037075001498951, guid: 71a53da93ef69814db83134ac2587b9f,
         type: 3}
@@ -36715,12 +36720,12 @@ PrefabInstance:
     - target: {fileID: 4788037075506542402, guid: 71a53da93ef69814db83134ac2587b9f,
         type: 3}
       propertyPath: m_FollowOffset.y
-      value: -1.002057
+      value: -0.9087864
       objectReference: {fileID: 0}
     - target: {fileID: 4788037075506542402, guid: 71a53da93ef69814db83134ac2587b9f,
         type: 3}
       propertyPath: m_FollowOffset.z
-      value: -8.035911
+      value: -8.114507
       objectReference: {fileID: 0}
     - target: {fileID: 4788037076218766136, guid: 71a53da93ef69814db83134ac2587b9f,
         type: 3}
@@ -36830,12 +36835,12 @@ PrefabInstance:
     - target: {fileID: 4788037076681968565, guid: 71a53da93ef69814db83134ac2587b9f,
         type: 3}
       propertyPath: m_FollowOffset.y
-      value: -1.002057
+      value: -0.9087864
       objectReference: {fileID: 0}
     - target: {fileID: 4788037076681968565, guid: 71a53da93ef69814db83134ac2587b9f,
         type: 3}
       propertyPath: m_FollowOffset.z
-      value: -8.035911
+      value: -8.114507
       objectReference: {fileID: 0}
     - target: {fileID: 4788037076804236332, guid: 71a53da93ef69814db83134ac2587b9f,
         type: 3}
@@ -36845,12 +36850,12 @@ PrefabInstance:
     - target: {fileID: 4788037076804236332, guid: 71a53da93ef69814db83134ac2587b9f,
         type: 3}
       propertyPath: m_FollowOffset.y
-      value: -1.002057
+      value: -0.9087864
       objectReference: {fileID: 0}
     - target: {fileID: 4788037076804236332, guid: 71a53da93ef69814db83134ac2587b9f,
         type: 3}
       propertyPath: m_FollowOffset.z
-      value: -8.035911
+      value: -8.114507
       objectReference: {fileID: 0}
     - target: {fileID: 4788037076818385808, guid: 71a53da93ef69814db83134ac2587b9f,
         type: 3}
@@ -36900,12 +36905,12 @@ PrefabInstance:
     - target: {fileID: 4788037076911905544, guid: 71a53da93ef69814db83134ac2587b9f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.15299919
+      value: 0.15299922
       objectReference: {fileID: 0}
     - target: {fileID: 4788037076911905544, guid: 71a53da93ef69814db83134ac2587b9f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.012837283
+      value: -0.012837291
       objectReference: {fileID: 0}
     - target: {fileID: 4788037077027149733, guid: 71a53da93ef69814db83134ac2587b9f,
         type: 3}
