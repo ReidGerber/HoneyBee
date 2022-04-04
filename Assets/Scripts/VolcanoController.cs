@@ -32,7 +32,6 @@ public class VolcanoController : MonoBehaviour
     IEnumerator startVolcano()
     {
         lavaPlaying = true;
-        //Debug.Log("started volcano coroutine");
         yield return new WaitForSeconds(Random.Range(lavaDelayMin, lavaDelayMax));
         PlayLava();
 
@@ -40,7 +39,6 @@ public class VolcanoController : MonoBehaviour
 
     void PlayLava()
     {
-        //Debug.Log("started lava");
         lava.Play();
         StartCoroutine(stopVolcano());
     }
