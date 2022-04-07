@@ -51,6 +51,7 @@ public class CharacterControllerMovement : MonoBehaviour
             animator.SetBool("isMoving", true);
         }
 
+
         //do not follow mouse "up" and "down"
         //if (direction.magnitude >= 0.1)
         //{

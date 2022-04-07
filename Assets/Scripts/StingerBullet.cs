@@ -28,11 +28,10 @@ public class StingerBullet : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("collision");
         
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "Bullet")
         {
-            Debug.Log("Collider = "+ other.gameObject.tag);
+
             StartCoroutine(Die());
         }
         
@@ -41,9 +40,8 @@ public class StingerBullet : MonoBehaviour
 
     IEnumerator Die()
     {
-        Debug.Log("dead");
         rb.velocity = Vector3.zero;
-        GetComponent<Renderer>().enabled = false;
+        GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
         Instantiate(dieParticle, transform);
         dieParticle.Play();
         yield return new WaitForSeconds(dieDelay);
